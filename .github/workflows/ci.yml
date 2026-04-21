@@ -48,6 +48,13 @@ jobs:
     # - name: Build with Gradle 8.9
     #   run: gradle build
 
+    - name: Build Jar
+      run: ./gradlew clean build
+      
+    - name: List build output
+      run: ls -R build/libs
+
+    
     - name: Docker build and push
       if: github.event_name == 'push'
       uses: mr-smithers-excellent/docker-build-push@v4
@@ -56,4 +63,4 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: 1.0
+        tags: latest
